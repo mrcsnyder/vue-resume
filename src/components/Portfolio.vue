@@ -11,12 +11,12 @@
 
         <div class="col-sm-12 mt-5 col-md-6" v-for="project in projects" :key="project.id">
 
-            <div class="my-gallery" v-for="image in project.main_images" :key="image.id">
+            <div class="my-gallery" v-for="image in project.main_image" :key="image.id">
 
                 <figure>
 
-                    <a  :href="'http://resume-api.thisdudecodes.com/images/'+image.file_name+''">
-                        <img  :src="'http://resume-api.thisdudecodes.com/images/thmb-'+image.file_name+''" itemprop="thumbnail" />
+                    <a :href="'http://resume-api.thisdudecodes.com/images/'+image.file_name+''">
+                        <img :src="'http://resume-api.thisdudecodes.com/images/thmb-'+image.file_name+''" />
                     </a>
 
                     <figcaption itemprop="caption description">{{image.description}}</figcaption>
