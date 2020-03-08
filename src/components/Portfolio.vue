@@ -15,13 +15,13 @@
 
                 <figure>
 
-                    <a :href="'http://resume-api.thisdudecodes.com/images/'+image.file_name+''">
-                        <img :src="'http://resume-api.thisdudecodes.com/images/thmb-'+image.file_name+''" />
-                    </a>
-
+                <portfolio-gallery :project-id="project.id"
+                                   :project-title="project.title"
+                                   :url-pre="urlPre"
+                                   :main-image="'http://resume-api.thisdudecodes.com/images/thmb-'+image.file_name+''"
+                />
                     <figcaption itemprop="caption description">{{image.description}}</figcaption>
                 </figure>
-
 
 
             </div>
@@ -33,11 +33,7 @@
                 <br/>
                 <p>{{project.full_detail}}</p>
             </b-collapse>
-            <portfolio-gallery :project-id="project.id"
-                               :project-title="project.title"
-                               :get-project-images="getProjectImages"
-                               :gallery="gallery"
-            />
+
         </div>
 
 
@@ -61,7 +57,8 @@
 
         components: {
 
-            PortfolioGallery
+            PortfolioGallery,
+
 
 
     },
@@ -69,7 +66,6 @@
         data(){
         return{
             projects: [],
-            gallery: [],
             urlPre: 'http://resume-api.thisdudecodes.com/api/'
 
         }
@@ -101,29 +97,6 @@
                         console.log(this.projects);
                     });
 
-
-            },
-
-            getProjectImages(id){
-                const url = this.urlPre + 'portfolio-project/'+id;
-
-                fetch(url, {
-                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                    //mode: 'no-cors', // no-cors, *cors, same-origin
-                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    // credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json'
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
-                    }})
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-
-                        this.gallery = data;
-                        console.log(this.gallery);
-                    });
 
             },
 

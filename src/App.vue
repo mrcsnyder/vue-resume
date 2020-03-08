@@ -153,56 +153,6 @@ export default {
     font-weight: 900;
   }
 
-  .my-gallery img {
-    width: 100%;
-    height: auto;
-    border: 2px solid #000000 !important;
-  }
-
-  /*portfolio styles*/
-
-  a.port-links{
-
-    color: #000000;
-
-  }
-
-  a.port-links:hover{
-    color:#000000;
-  }
-
-  a.port-links:visited{
-    color:#000000;
-  }
-
-
-  /*portfolio experiments...*/
-
-  .card-img-wrap {
-    overflow: hidden;
-    position: relative;
-  }
-  .card-img-wrap:after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    /*background: rgba(255,255,255,0.3);*/
-    opacity: 0;
-    transition: opacity .25s;
-  }
-  .card-img-wrap img {
-    transition: transform .25s;
-    width: 100%;
-  }
-  .card-img-wrap:hover img {
-    transform: scale(1.2);
-
-  }
-  .card-img-wrap:hover:after {
-    opacity: 1;
-
-  }
-
 
   /*media queries*/
 
