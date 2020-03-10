@@ -8,7 +8,7 @@
              header-text-variant="light"
              body-bg-variant="dark"
              body-text-variant="light"
-             hide-footer="true"
+             :hide-footer="true"
              size="xl"
              :id="'modal-'+ProjectId"
              :title="(this.currentImg + 1)+'/'+gallery.length+' '+ProjectTitle">
