@@ -6,7 +6,7 @@
             <div class="row">
 
                 <div class="col-lg-8 col-12 mt-2">
-                    <h2 class="trebuchet lg-headers"><i class="fas fa-laptop-code"></i> Experience</h2>
+                    <h2 class="trebuchet lg-headers"><font-awesome-icon :icon="['fas', 'laptop-code']" /> Professional Experience</h2>
                     <br/>
 
 
@@ -26,104 +26,14 @@
                     <hr/>
 
 
-                    <h2 class="trebuchet lg-headers"> <i class="fas fa-graduation-cap"></i> Education</h2>
-                    <br/>
+                   <resume-education :education="education"/>
 
-                    <span class="badge badge-dark mb-2 trebuchet">Aug 2015 - Aug 2017</span>
-                    <br/>
-                    <h3 class="trebuchet h3-resume h3-school-title"><img class="img-fluid school-logo" src="../assets/wsu-icon-transparent.png" alt="Washington State University:  Go Cougs!"> Washington State University</h3>
-                    <p class="calibri">I attended Washington State University starting August 2015 and completed earning my BBA in Management Information Systems magna cum laude August 2017.</p>
-                    <h5 class="trebuchet text-muted">Degree Earned</h5>
-
-                    <table class="table calibri">
-                        <thead class="thead-dark">
-                        <tr class="d-flex">
-                            <th class="col-4" scope="col">Degree</th>
-                            <th class="col-4" scope="col">Completed</th>
-                            <th class="col-4" scope="col">GPA</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="d-flex">
-                            <td class="col-4">MIS<br/>BBA<br/>(magna cum laude)</td>
-                            <td class="col-4">Aug 2017</td>
-                            <td class="col-4">3.82</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <br/>
-                    <hr/>
-
-                    <span class="badge badge-dark mb-2 trebuchet">Jul 2012 - Jun 2015</span>
-                    <br/>
-                    <h3 class="trebuchet h3-resume h3-school-title"><img class="img-fluid school-logo" src="../assets/scc-logo.png" alt="Spokane Community College:  Go Squatch!"> Spokane Community College</h3>
-                    <p class="calibri">I started attending Spokane Community College in July 2012 and initially decided to pursue my AAS in Software Development. In the process, I made the decision to continue pursuing my education with a goal of attending WSU.  I earned two more degrees along the way in order to earn as many of my prerequisites towards my BA as possible.</p>
-                    <h5 class="trebuchet text-muted">Degrees Earned</h5>
-
-                    <table class="table calibri">
-                        <thead class="thead-dark">
-                        <tr class="d-flex">
-                            <th class="col-4" scope="col">Degree</th>
-                            <th class="col-4" scope="col">Completed</th>
-                            <th class="col-4" scope="col">GPA</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="d-flex">
-                            <td class="col-4">Software Development<br/>AAS<br/></td>
-                            <td class="col-4">Dec 2014</td>
-                            <td class="col-4">3.88</td>
-                        </tr>
-                        <tr class="d-flex">
-                            <td class="col-4">Associates in Arts<br/>AA<br/></td>
-                            <td class="col-4">Jun 2015</td>
-                            <td class="col-4">—</td>
-                        </tr>
-                        <tr class="d-flex">
-                            <td class="col-4">Associates in Business<br/>AA<br/></td>
-                            <td class="col-4">Jun 2015</td>
-                            <td class="col-4">—</td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                    <h5 class="trebuchet text-muted">Certificates Earned</h5>
-                    <table class="table calibri">
-                        <thead class="thead-dark">
-                        <tr class="d-flex">
-                            <th class="col-6" scope="col">Certificate</th>
-                            <th class="col-6" scope="col">Date Earned</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="d-flex">
-                            <td class="col-6">Mobile Development</td>
-                            <td class="col-6">Dec 2014</td>
-                        </tr>
-                        <tr class="d-flex">
-                            <td class="col-6">Web Design</td>
-                            <td class="col-6">Jun 2014</td>
-                        </tr>
-                        <tr class="d-flex">
-                            <td class="col-6">Web Developer</td>
-                            <td class="col-6">Mar 2014</td>
-                        </tr>
-                        <tr class="d-flex">
-                            <td class="col-6">.NET Developer</td>
-                            <td class="col-6">Mar 2014</td>
-                        </tr>
-                        <tr class="d-flex">
-                            <td class="col-6">Computer Science</td>
-                            <td class="col-6">Jun 2013</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
+                    <h2 class="trebuchet lg-headers"><font-awesome-icon :icon="['fas', 'award']" /> Awards</h2>
                     <h5 class="trebuchet text-muted">Scholarships</h5>
                     <table class="table calibri">
                         <thead class="thead-dark">
                         <tr class="d-flex">
-                            <th class="col-6" scope="col">Scholarship</th>
+                            <th class="col-6" scope="col"> Scholarship</th>
                             <th class="col-6" scope="col">Awarded</th>
                         </tr>
                         </thead>
@@ -459,10 +369,60 @@
 
 <script>
 
+    import ResumeEducation from "./ResumeEducation";
 
     export default {
         name: 'Resume',
+
+        data() {
+            return {
+                education: [],
+                urlPre: 'http://resume-api.thisdudecodes.com/api/'
+
+            }
+        },
+
         components: {
+            ResumeEducation,
+
+            },
+
+
+
+
+        methods: {
+
+            //get educational background from endpoint
+            getEducation() {
+
+                const url = this.urlPre + 'education';
+
+                fetch(url, {
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                    // mode: 'no-cors', // no-cors, *cors, same-origin
+                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    // credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+
+                        this.education = data;
+                        console.log(this.education);
+                    });
+
+
+            },
+        },
+
+        mounted() {
+
+           this.getEducation();
 
         }
     }

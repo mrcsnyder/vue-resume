@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+//fontawesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserGraduate, faLaptopCode, faAward } from '@fortawesome/free-solid-svg-icons'
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 //import VueRouter...
 import VueRouter from 'vue-router';
 
@@ -23,6 +29,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 //use BootstrapVue as a plugin...
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
+
+//use fontawesome
+library.add(faUserGraduate, faLaptopCode, faAward);
+
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 //use VueRouter as a plugin...
 Vue.use(VueRouter);
