@@ -27,28 +27,9 @@
 
 
                    <resume-education :education="education"/>
+                   <resume-awards :awards="awards"/>
 
-                    <h2 class="trebuchet lg-headers"><font-awesome-icon :icon="['fas', 'award']" /> Awards</h2>
-                    <h5 class="trebuchet text-muted">Scholarships</h5>
-                    <table class="table calibri">
-                        <thead class="thead-dark">
-                        <tr class="d-flex">
-                            <th class="col-6" scope="col"> Scholarship</th>
-                            <th class="col-6" scope="col">Awarded</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="d-flex">
-                            <td class="col-6">Community Colleges of Spokane Alumni Association Scholarship</td>
-                            <td class="col-6">2013-2014</td>
-                        </tr>
-                        <tr class="d-flex">
-                            <td class="col-6">Community Colleges of Spokane Alumni Association Scholarship</td>
-                            <td class="col-6">2014-2015</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <hr/>
+
                 </div>
 
                 <div class="col-lg-4 col-12">
@@ -370,6 +351,7 @@
 <script>
 
     import ResumeEducation from "./ResumeEducation";
+    import ResumeAwards from "./ResumeAwards";
 
     export default {
         name: 'Resume',
@@ -377,6 +359,7 @@
         data() {
             return {
                 education: [],
+                awards: {scholarships: [], honors: []},
                 urlPre: 'http://resume-api.thisdudecodes.com/api/'
 
             }
@@ -384,10 +367,9 @@
 
         components: {
             ResumeEducation,
+            ResumeAwards,
 
             },
-
-
 
 
         methods: {
@@ -418,11 +400,42 @@
 
 
             },
+
+            //get educational background from endpoint
+            getAwards() {
+
+                const url = this.urlPre + 'education-awards';
+
+                fetch(url, {
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                    // mode: 'no-cors', // no-cors, *cors, same-origin
+                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    // credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+
+                        console.log(data);
+                        this.awards.scholarships = data.scholarships;
+                        this.awards.honors = data.honors;
+
+                        console.log(this.awards);
+                    });
+
+
+            },
         },
 
         mounted() {
 
            this.getEducation();
+           this.getAwards();
 
         }
     }
