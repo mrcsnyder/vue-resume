@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div v-if="education.length > 0">
        <h2 class="trebuchet lg-headers"> <font-awesome-icon :icon="['fas', 'user-graduate']" /> Education</h2>
        <br/>
 
@@ -9,8 +9,6 @@
            <br/>
            <h3 class="trebuchet h3-resume h3-school-title"><img class="img-fluid school-logo" :src="'http://resume-api.thisdudecodes.com/images/'+edu.logo" :alt="''+edu.school_name"> {{edu.school_name}}</h3>
            <p class="calibri">{{edu.details}}</p>
-
-
 
            <div v-if="edu.education_degrees.length > 0">
 
@@ -26,7 +24,7 @@
                    </thead>
                    <tbody>
                    <tr v-for="degree in edu.education_degrees" :key="degree.id" class="d-flex">
-                       <td class="col-4">{{degree.major}} ({{degree.honors_info}})</td>
+                       <td class="col-4">{{degree.major}}<br/> ({{degree.honors_info}})</td>
                        <td class="col-4">{{degree.completed_month_year_format}}</td>
                        <td class="col-4">{{degree.gpa}}</td>
                    </tr>
