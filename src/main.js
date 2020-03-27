@@ -3,7 +3,7 @@ import App from './App.vue'
 
 //fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserGraduate, faLaptopCode, faAward } from '@fortawesome/free-solid-svg-icons'
+import { faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -31,7 +31,7 @@ Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 
 //use fontawesome
-library.add(faUserGraduate, faLaptopCode, faAward);
+library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle);
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

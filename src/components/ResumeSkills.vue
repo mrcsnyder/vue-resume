@@ -102,7 +102,7 @@
         },
 
         methods:{
-            
+
         },
 
         mounted() {
