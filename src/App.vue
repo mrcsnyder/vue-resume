@@ -2,8 +2,9 @@
   <b-container id="app">
     <navbar></navbar>
 
-
+    <keep-alive>
     <router-view class="mt-5"> </router-view>
+    </keep-alive>
 
     <sticky-footer></sticky-footer>
   </b-container>
@@ -24,7 +25,6 @@ export default {
 </script>
 
 <style>
-
 
   .trebuchet {
     font-family: 'Trebuchet MS';

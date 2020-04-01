@@ -15,9 +15,9 @@
                 <h1 id="name_header" class="text-center trebuchet lg-headers">{{person.name}}</h1>
                 <h3 class="text-center trebuchet text-muted">{{person.current_role}}</h3>
                 <h2 class="text-center">
-                    <a class="icon-link" href="https://www.linkedin.com/in/chris-snyder-49956610" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a class="icon-link" href="https://github.com/iplayguitar81" target="_blank"><i class="fab fa-github-square"></i></a>
-                    <a class="icon-link tab-link" href="#contact" aria-controls="contact"><i class="fas fa-envelope-square"></i></a>
+                    <a class="icon-link mr-2" href="https://www.linkedin.com/in/chris-snyder-49956610" target="_blank"><font-awesome-icon :icon="['fab', 'linkedin']" /></a>
+                    <a class="icon-link mr-2" href="https://github.com/iplayguitar81" target="_blank"><font-awesome-icon :icon="['fab', 'github-square']" /></a>
+                    <router-link class="icon-link tab-link" to="/contact"><font-awesome-icon :icon="['fas', 'envelope-square']" /></router-link>
                 </h2>
             </div>
 
