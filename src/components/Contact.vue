@@ -43,6 +43,8 @@
                     </div>
                 </div>
             </div>
+
+            <div class="g-recaptcha" data-sitekey="6Lc6uOUUAAAAAD06XtOzaXtr-2DoC15zQ4fh0mj4"></div>
             <br/>
             <input class="btn btn-lg btn-dark" type="submit" data-theme="a" value="Send Message" id="submit"/>
             <br/>
@@ -65,7 +67,26 @@
         components: {
 
 
-        }
+        },
+
+        methods: {
+            createRecaptcha () {
+                let script = document.createElement('script')
+                script.setAttribute('async', '')
+                script.setAttribute('defer', '')
+                script.id = 'recaptchaScript'
+                script.setAttribute( 'src','https://www.google.com/recaptcha/api.js?render=explicit"')
+                document.getElementsByTagName('head')[0].appendChild(script)
+
+            }
+        },
+
+        mounted() {
+            // create reCaptcha async defer with createRecaptcha function
+            this.createRecaptcha()
+
+        },
+
 
     }
 

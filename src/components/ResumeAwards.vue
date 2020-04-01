@@ -2,7 +2,7 @@
     <div v-if="Object.keys(awards).length > 0">
         <h2 class="trebuchet lg-headers"><font-awesome-icon :icon="['fas', 'award']" /> Awards</h2>
     <div>
-        
+
         <div v-if="awards.scholarships.length > 0">
         <h5 class="trebuchet text-muted">Scholarships</h5>
         <table class="table calibri">
