@@ -15,41 +15,42 @@
 <!--    </div>-->
 
     <div id="contact_form">
-        <form id="form1">
+<!--        <form id="form1">-->
             <p class="calibri main-text">Please feel free to send me a message!  I will review what has been sent to me and get back to you as soon as possible!  Thank you for taking the time to look at my portfolio &amp; resume.</p>
             <br/>
             <div data-role="content">
                 <div class="form-group trebuchet">
-                    <label class="resume-label" for="name" data-theme="d">Name</label>
+                    <label class="resume-label" for="name">Name</label>
 
                     <div data-role="fieldcontainer">
-                        <input class="form-control" type="text" id="name" name="name" data-theme="a" placeholder="Please Enter Your Name"/>
+                        <input class="form-control" type="text" id="name" name="name" v-model="name" placeholder="Please Enter Your Name"/>
                     </div>
 
                 </div>
                 <br/>
                 <div class="form-group trebuchet">
-                    <label class="resume-label" for="email" data-theme="d">E-mail</label>
+                    <label class="resume-label" for="email">E-mail</label>
                     <div data-role="fieldcontainer">
-                        <input class="form-control" type="email" id="email" name="email" data-theme="a" placeholder="Please Enter Your Email"/>
+                        <input class="form-control" type="email" id="email" name="email" v-model="email" placeholder="Please Enter Your Email"/>
                     </div>
 
                 </div>
                 <br/>
                 <div class="form-group trebuchet">
-                    <label class="resume-label" for="comments" data-theme="d">Message</label>
+                    <label class="resume-label" for="message">Message</label>
                     <div data-role="fieldcontainer">
-                        <textarea class="form-control" id="comments" name="comments" data-theme="d" placeholder="Please Enter Your Message"></textarea>
+                        <textarea class="form-control" id="message" name="message" v-model="message"
+                                  placeholder="Please Enter Your Message"/>
                     </div>
                 </div>
             </div>
 
-            <div class="g-recaptcha" data-sitekey="6Lc6uOUUAAAAAD06XtOzaXtr-2DoC15zQ4fh0mj4"></div>
+            <div id="captyCapn" class="g-recaptcha" data-sitekey="6Lc6uOUUAAAAAD06XtOzaXtr-2DoC15zQ4fh0mj4"></div>
             <br/>
-            <input class="btn btn-lg btn-dark" type="submit" data-theme="a" value="Send Message" id="submit"/>
+            <input class="btn btn-lg btn-dark" type="submit" @click="sendContact()" value="Send Message" id="submit"/>
             <br/>
             <br/>
-        </form>
+<!--        </form>-->
     </div>
 
 
@@ -69,7 +70,42 @@
 
         },
 
+        data(){
+            return{
+
+                message: '',
+                email: '',
+                name: '',
+
+
+            }
+
+        },
+
         methods: {
+
+            sendContact(){
+
+                let captchaDiv = document.getElementById('captyCapn');
+
+                let captchaResponse = captchaDiv.querySelector('.g-recaptcha-response').value;
+
+
+                fetch('http://resume-api.thisdudecodes.com/resume/send-contact', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({name: this.name,
+                        email: this.email,
+                        message: this.message,
+                        captyResponse: captchaResponse } )
+                }).then(res=>res.json())
+                    .then(res => console.log(res));
+
+            },
+
             createRecaptcha () {
                 let script = document.createElement('script')
                 script.setAttribute('async', '')
