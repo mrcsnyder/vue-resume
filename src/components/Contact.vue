@@ -15,13 +15,16 @@
 <!--    </div>-->
 
     <div id="contact_form">
-<!--        <form id="form1">-->
+
             <p class="calibri main-text">Please feel free to send me a message!  I will review what has been sent to me and get back to you as soon as possible!  Thank you for taking the time to look at my portfolio &amp; resume.</p>
             <br/>
             <div data-role="content">
                 <div class="form-group trebuchet">
                     <label class="resume-label" for="name">Name</label>
-
+                   <span>
+                       <br/>
+                       <label v-if="errors.name" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.name[0] }}</label>
+                   </span>
                     <div data-role="fieldcontainer">
                         <input class="form-control" type="text" id="name" name="name" v-model="name" placeholder="Please Enter Your Name"/>
                     </div>
@@ -30,6 +33,11 @@
                 <br/>
                 <div class="form-group trebuchet">
                     <label class="resume-label" for="email">E-mail</label>
+                    <span>
+                       <br/>
+                       <label v-if="errors.email" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.email[0] }}</label>
+                   </span>
+
                     <div data-role="fieldcontainer">
                         <input class="form-control" type="email" id="email" name="email" v-model="email" placeholder="Please Enter Your Email"/>
                     </div>
@@ -38,19 +46,27 @@
                 <br/>
                 <div class="form-group trebuchet">
                     <label class="resume-label" for="message">Message</label>
+                    <span>
+                       <br/>
+                       <label v-if="errors.message" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.message[0] }}</label>
+                   </span>
                     <div data-role="fieldcontainer">
                         <textarea class="form-control" id="message" name="message" v-model="message"
                                   placeholder="Please Enter Your Message"/>
                     </div>
                 </div>
             </div>
-
+        <span>
+            <br/>
+            <label v-if="errors.captyResponse" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.captyResponse[0] }}</label>
+        </span>
             <div id="captyCapn" class="g-recaptcha" data-sitekey="6Lc6uOUUAAAAAD06XtOzaXtr-2DoC15zQ4fh0mj4"></div>
+
             <br/>
             <input class="btn btn-lg btn-dark" type="submit" @click="sendContact()" value="Send Message" id="submit"/>
             <br/>
             <br/>
-<!--        </form>-->
+
     </div>
 
 
@@ -76,6 +92,7 @@
                 message: '',
                 email: '',
                 name: '',
+                errors: [],
 
 
             }
@@ -91,18 +108,31 @@
                 let captchaResponse = captchaDiv.querySelector('.g-recaptcha-response').value;
 
 
+                const data = { name: this.name, email: this.email, message: this.message, captyResponse: captchaResponse };
+
                 fetch('http://resume-api.thisdudecodes.com/resume/send-contact', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({name: this.name,
-                        email: this.email,
-                        message: this.message,
-                        captyResponse: captchaResponse } )
-                }).then(res=>res.json())
-                    .then(res => console.log(res));
+                    body: JSON.stringify(data)
+                })
+                    .then(
+                    function(data) {
+                        let json = data.json();
+                        if (data.status >= 200 && data.status < 300) {
+                            return json;
+
+                        } else {
+
+                            return json.then(Promise.reject.bind(Promise));
+                        }
+                    }
+                ).catch((error) => {
+                    this.errors = error.errors;
+                    console.log(this.errors);
+                });
 
             },
 
