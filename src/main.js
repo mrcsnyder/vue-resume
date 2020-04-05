@@ -5,18 +5,14 @@ import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons'
-import { faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons'
+import { faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faSmile, faSmileWink } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 //import VueRouter...
 import VueRouter from 'vue-router';
 
-// import axios from 'axios';
-
-//import VueAxios from 'vue-axios'
-
-//import routes file for use in project...
+//import routes file
 import routes from './routes';
 
 //import VueBootstrap...
@@ -33,7 +29,7 @@ Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 
 //use fontawesome
-library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faLinkedin, faGithubSquare );
+library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faLinkedin, faGithubSquare, faSmile, faSmileWink );
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
