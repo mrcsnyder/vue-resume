@@ -6,7 +6,7 @@
         <div class="row">
 
             <div class="col-lg-3 offset-lg-3 col-md-12 col-sm-12 col-12 order-1 order-lg-1 order-sm-1">
-                <img :src="'http://resume-api.thisdudecodes.com/images/'+person.profile_image" id="portrait-img" class="img-fluid portrait-about mx-auto d-block rounded-circle" :alt="person.name">
+                <img :title="''+person.name+'\n'+ person.current_role+''" :src="'http://resume-api.thisdudecodes.com/images/'+person.profile_image" id="portrait-img" class="img-fluid portrait-about mx-auto d-block rounded-circle" :alt="person.name">
 
             </div>
 
@@ -15,9 +15,9 @@
                 <h1 id="name_header" class="text-center trebuchet lg-headers">{{person.name}}</h1>
                 <h3 class="text-center trebuchet text-muted">{{person.current_role}}</h3>
                 <h2 class="text-center">
-                    <a class="icon-link mr-2" href="https://www.linkedin.com/in/chris-snyder-49956610" target="_blank"><font-awesome-icon :icon="['fab', 'linkedin']" /></a>
-                    <a class="icon-link mr-2" href="https://github.com/iplayguitar81" target="_blank"><font-awesome-icon :icon="['fab', 'github-square']" /></a>
-                    <router-link class="icon-link tab-link" to="/contact"><font-awesome-icon :icon="['fas', 'envelope-square']" /></router-link>
+                    <a class="icon-link mr-2" title="linkedin profile" :href="''+person.linkedin+''" target="_blank"><font-awesome-icon :icon="['fab', 'linkedin']" /></a>
+                    <a class="icon-link mr-2" title="github profile" :href="''+person.git_source+''" target="_blank"><font-awesome-icon :icon="['fab', 'github-square']" /></a>
+                    <router-link class="icon-link tab-link" title="contact me" to="/contact"><font-awesome-icon :icon="['fas', 'envelope-square']" /></router-link>
                 </h2>
             </div>
 
