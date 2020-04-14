@@ -1,31 +1,48 @@
 <template>
 
-<div>
+    <div>
 
-    <b-img thumbnail v-b-modal="'modal-'+ProjectId" @click="getProjectImages(ProjectId)" :src="mainImage" />
+            <b-img data-toggle="modal" v-b-modal="'modal-'+ProjectId" @click="getProjectImages(ProjectId)" thumbnail :src="mainImage" />
 
-    <b-modal header-bg-variant="dark"
-             header-text-variant="light"
-             body-bg-variant="dark"
-             body-text-variant="light"
-             :hide-footer="true"
-             size="xl"
-             :id="'modal-'+ProjectId"
-             :title="(this.currentImg + 1)+'/'+gallery.length+' '+ProjectTitle">
 
-        <div class="portfolio-gallery" v-if="gallery.length > 0">
+        <div class="lightbox" id="">
+            <b-modal header-bg-variant="dark"
+                     header-text-variant="light"
+                     body-bg-variant="dark"
+                     body-text-variant="light"
+                     :hide-footer="true"
+                     size="xl"
+                     :id="'modal-'+ProjectId"
+                     scrollable
 
-            <b-img class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+gallery[this.currentImg].file_name"/>
-            <p>{{gallery[this.currentImg].description}}</p>
+            >
 
-            <b-icon @click="galleryPrev" icon="chevron-left" font-scale="4" class="prev"/>
-            <b-icon @click="galleryNext" icon="chevron-right" font-scale="4" class="next"/>
+                <template v-if="gallery.length > 0" v-slot:modal-title>
 
+                    <b-container class="">
+                        <b-row>
+                            <b-col class="pb-5" cols="1">{{(currentImg + 1)+'/'+gallery.length}}</b-col>
+                            <b-col class="" cols="11"><span class="gallery-description">{{gallery[currentImg].description}}</span></b-col>
+                        </b-row>
+
+                    </b-container>
+
+                </template>
+
+            <b-icon @click="galleryPrev" icon="chevron-left" font-scale="4" class="prev"></b-icon>
+            <div class="" v-if="gallery.length > 0">
+                <b-img class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+gallery[this.currentImg].file_name" />
+
+            </div>
+
+            <b-icon @click="galleryNext" icon="chevron-right" font-scale="4" class="next"></b-icon>
+            </b-modal>
         </div>
 
-    </b-modal>
 
-</div>
+
+
+    </div>
 
 
 </template>
@@ -42,6 +59,7 @@
             return{
                 currentImg: 0,
                 gallery: [],
+                zoomed: false,
 
             }
         },
@@ -89,7 +107,7 @@
                 }
 
                 else{
-                   // go to first image if on the last image and next is clicked
+                    // go to first image if on the last image and next is clicked
                     this.currentImg = 0;
                 }
 
@@ -106,7 +124,17 @@
                     // go to the last image if going one past zero
                     this.currentImg = this.gallery.length - 1;
                 }
-            }
+            },
+
+            zoomGallery(){
+
+                let galleryDiv = document.getElementById("galleryDiv");
+                galleryDiv.classList.remove("gallery-img-wrapper");
+                this.zoomed = true;
+
+            },
+
+
         }
 
     }
@@ -114,6 +142,11 @@
 </script>
 
 <style scoped>
+
+    .gallery-description {
+        font-size: .7em;
+
+    }
 
     /* Next & previous buttons */
     .prev,
@@ -145,5 +178,10 @@
         background-color: rgba(0, 0, 0, 0.8);
     }
 
+    
+    .modal-title {
+        margin-bottom: 0;
+         line-height: 1.1 !important;
+    }
 
 </style>
