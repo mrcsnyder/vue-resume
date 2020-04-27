@@ -19,8 +19,9 @@
 
                 <template v-if="gallery.length > 0" v-slot:modal-title>
 
-                    <b-container class="">
-                        <b-row>
+                    <b-container fluid class="">
+
+                        <b-row class="">
                             <b-col class="pb-5" cols="1">{{(currentImg + 1)+'/'+gallery.length}}</b-col>
                             <b-col class="" cols="11"><span class="gallery-description">{{gallery[currentImg].description}}</span></b-col>
                         </b-row>
@@ -145,6 +146,7 @@
 
     .gallery-description {
         font-size: .7em;
+        line-height: 1 !important;
 
     }
 
@@ -178,10 +180,11 @@
         background-color: rgba(0, 0, 0, 0.8);
     }
 
-    
-    .modal-title {
-        margin-bottom: 0;
-         line-height: 1.1 !important;
-    }
+
+    /*.modal-backdrop.in {*/
+    /*    background-color: rgba(193, 66, 66, 1) !important;*/
+    /*}*/
+
+
 
 </style>

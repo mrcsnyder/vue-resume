@@ -26,6 +26,11 @@ export default {
 
 <style>
 
+  .modal-backdrop {
+    background-color: #343a40 !important;
+    opacity: 1 !important;
+  }
+
   .trebuchet {
     font-family: 'Trebuchet MS';
   }
