@@ -27,8 +27,17 @@ export default {
 <style>
 
   .modal-backdrop {
-    background-color: #343a40 !important;
+    background-color: #000000 !important;
     opacity: 1 !important;
+  }
+
+  .modal-content{
+    border:none !important;
+    background-color: #000000 !important;
+  }
+
+  .modal-title{
+    line-height:1 !important;
   }
 
   .trebuchet {

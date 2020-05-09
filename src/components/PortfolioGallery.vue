@@ -2,13 +2,12 @@
 
     <div>
 
-            <b-img data-toggle="modal" v-b-modal="'modal-'+ProjectId" @click="getProjectImages(ProjectId)" thumbnail :src="mainImage" />
-
+     <b-img data-toggle="modal" v-b-modal="'modal-'+ProjectId" @click="getProjectImages(ProjectId)" thumbnail :src="mainImage" />
 
         <div class="lightbox" id="">
-            <b-modal header-bg-variant="dark"
+            <b-modal
                      header-text-variant="light"
-                     body-bg-variant="dark"
+
                      body-text-variant="light"
                      :hide-footer="true"
                      size="xl"
@@ -16,14 +15,12 @@
                      scrollable
 
             >
-
                 <template v-if="gallery.length > 0" v-slot:modal-title>
-
-                    <b-container fluid class="">
+                    <span class="gallery-counter">{{(currentImg + 1)+'/'+gallery.length}}</span>
+                    <b-container fluid class="modalImg mt-1">
 
                         <b-row class="">
-                            <b-col class="pb-5" cols="1">{{(currentImg + 1)+'/'+gallery.length}}</b-col>
-                            <b-col class="" cols="11"><span class="gallery-description">{{gallery[currentImg].description}}</span></b-col>
+                            <b-col class="" cols="12"><span class="gallery-description">{{gallery[currentImg].description}}</span></b-col>
                         </b-row>
 
                     </b-container>
@@ -144,10 +141,15 @@
 
 <style scoped>
 
-    .gallery-description {
-        font-size: .7em;
-        line-height: 1 !important;
 
+    .gallery-description {
+        font-size: 1rem;
+        /*line-height: 1 !important;*/
+
+    }
+
+    .gallery-counter{
+        font-size: 1rem;
     }
 
     /* Next & previous buttons */
