@@ -5,39 +5,41 @@
      <b-img data-toggle="modal" v-b-modal="'modal-'+ProjectId" @click="getProjectImages(ProjectId)" thumbnail :src="mainImage" />
 
         <div class="lightbox" id="">
+
             <b-modal
                      header-text-variant="light"
-
                      body-text-variant="light"
                      :hide-footer="true"
                      size="xl"
                      :id="'modal-'+ProjectId"
                      scrollable
-
             >
+
                 <template v-if="gallery.length > 0" v-slot:modal-title>
-                    <span class="gallery-counter">{{(currentImg + 1)+'/'+gallery.length}}</span>
-                    <b-container fluid class="modalImg mt-1">
 
-                        <b-row class="">
-                            <b-col class="" cols="12"><span class="gallery-description">{{gallery[currentImg].description}}</span></b-col>
-                        </b-row>
+                    <b-container fluid class="mx-auto">
 
+                        <b-icon @click="galleryPrev" icon="caret-left" font-scale="1" class="prev"></b-icon>
+                        <span class="gallery-counter ml-2 mr-2">{{(currentImg + 1)+'/'+gallery.length}}</span>
+                        <b-icon @click="galleryNext" icon="caret-right" font-scale="1" class="next"></b-icon>
+
+                    </b-container>
+
+                    <b-container fluid class="">
+                                <span class="gallery-description">{{gallery[currentImg].description}}</span>
                     </b-container>
 
                 </template>
 
-            <b-icon @click="galleryPrev" icon="chevron-left" font-scale="4" class="prev"></b-icon>
             <div class="" v-if="gallery.length > 0">
                 <b-img class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+gallery[this.currentImg].file_name" />
 
             </div>
 
-            <b-icon @click="galleryNext" icon="chevron-right" font-scale="4" class="next"></b-icon>
             </b-modal>
+
+
         </div>
-
-
 
 
     </div>
@@ -58,7 +60,6 @@
                 currentImg: 0,
                 gallery: [],
                 zoomed: false,
-
             }
         },
 
@@ -115,7 +116,6 @@
                 if(this.currentImg > 0){
 
                     this.currentImg --;
-
                 }
 
                 else{
@@ -124,13 +124,11 @@
                 }
             },
 
-            zoomGallery(){
 
-                let galleryDiv = document.getElementById("galleryDiv");
-                galleryDiv.classList.remove("gallery-img-wrapper");
-                this.zoomed = true;
-
-            },
+//work on a zoom feature?
+            // zoomGallery(){
+            //
+            // },
 
 
         }
@@ -149,44 +147,34 @@
     }
 
     .gallery-counter{
-        font-size: 1rem;
+        font-size: 1.4rem;
     }
 
     /* Next & previous buttons */
     .prev,
     .next {
         cursor: pointer;
-        position: absolute;
-        top: 50%;
         width: auto;
-        padding: 16px;
-        margin-top: -50px;
-        color: white;
+        padding: .2rem;
+        color: #777777;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 2rem !important;
         transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
         user-select: none;
         -webkit-user-select: none;
     }
 
     /* Position the "next button" to the right */
     .next {
-        right: 0;
+        /*right: 0;*/
         border-radius: 3px 0 0 3px;
     }
 
     /* On hover, add a black background color with a little bit see-through */
     .prev:hover,
     .next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(119, 119, 119, 0.3);
     }
-
-
-    /*.modal-backdrop.in {*/
-    /*    background-color: rgba(193, 66, 66, 1) !important;*/
-    /*}*/
-
 
 
 </style>

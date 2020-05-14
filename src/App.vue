@@ -40,6 +40,29 @@ export default {
     line-height:1 !important;
   }
 
+  body.modal-open {
+    /*overflow: hidden;*/
+    /*overflow: scroll !important;*/
+    overflow-y: auto !important;
+    /*padding-right: 0 !important;*/
+  }
+
+  img.img-thumbnail:active {
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 0.3rem rgb(119, 119, 119) !important;
+  }
+
+  img.img-thumbnail:focus {
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 0.3rem rgb(119, 119, 119) !important;
+    outline: none !important;
+  }
+
+  img.img-thumbnail:visited {
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 0.3rem rgb(119, 119, 119) !important;
+  }
+
   .trebuchet {
     font-family: 'Trebuchet MS';
   }

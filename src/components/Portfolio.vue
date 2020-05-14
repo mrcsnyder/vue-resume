@@ -3,7 +3,7 @@
 <div class="mb-3">
 
     <br/>
-    <h1 id="portfolio_header" class="text-center trebuchet lg-headers"><b-icon-document-code></b-icon-document-code> Portfolio</h1>
+    <h1 id="portfolio_header" class="text-center trebuchet lg-headers"><b-icon-file-code></b-icon-file-code> Portfolio</h1>
     <p class="main-text calibri">This section is dedicated to some of the work I have completed and felt appropriate to showcase.  If you click on a project image on this page, a navigable gallery will be displayed.  Each image in a gallery includes a  description of the pictured page.  If you click on an accompanying 'More Info' button then you will be able to read more about a particular project.</p>
 
     <!--beginning of portfolio galleries-->
@@ -20,6 +20,7 @@
                                    :url-pre="urlPre"
                                    :main-image="'http://resume-api.thisdudecodes.com/images/thmb-'+image.file_name+''"
                 />
+
                     <figcaption itemprop="caption description">{{image.description}}</figcaption>
                 </figure>
 

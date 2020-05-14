@@ -1,7 +1,7 @@
 <template>
     <div>
 
-            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-document-text font-scale="1"></b-icon-document-text> Resume <a class="btn btn-sm btn-dark" href="Chris_Snyder_Resume.pdf"><i class="fas fa-download"></i> PDF</a></h1>
+            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-file-text font-scale="1"></b-icon-file-text> Resume <a class="btn btn-sm btn-dark" href="Chris_Snyder_Resume.pdf"><i class="fas fa-download"></i> PDF</a></h1>
 
             <div class="row">
 
