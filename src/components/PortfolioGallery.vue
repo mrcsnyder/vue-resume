@@ -9,25 +9,32 @@
             <b-modal
                      header-text-variant="light"
                      body-text-variant="light"
+                     :hide-header-close="true"
                      :hide-footer="true"
                      size="xl"
                      :id="'modal-'+ProjectId"
                      scrollable
             >
 
-                <template v-if="gallery.length > 0" v-slot:modal-title>
+                <template v-if="gallery.length > 0" v-slot:modal-title="{ close }">
+                    <b-button size="sm" class="float-right" variant="dark" @click="close()">
+                        &times;
+                    </b-button>
 
-                    <b-container fluid class="mx-auto">
+                    <div class="w-100">
 
-                        <b-icon @click="galleryPrev" icon="caret-left" font-scale="1" class="prev"></b-icon>
-                        <span class="gallery-counter ml-2 mr-2">{{(currentImg + 1)+'/'+gallery.length}}</span>
-                        <b-icon @click="galleryNext" icon="caret-right" font-scale="1" class="next"></b-icon>
+                        <div class="text-center">
+                            <b-icon @click="galleryPrev" icon="caret-left" font-scale="1" class="prev"></b-icon>
+                            <span class="gallery-counter ml-2 mr-2">{{(currentImg + 1)+'/'+gallery.length}}</span>
+                            <b-icon @click="galleryNext" icon="caret-right" font-scale="1" class="next"></b-icon>
+                        </div>
 
-                    </b-container>
+                    <div class="mt-1">
 
-                    <b-container fluid class="">
-                                <span class="gallery-description">{{gallery[currentImg].description}}</span>
-                    </b-container>
+                     <span class="">{{gallery[currentImg].description}}</span>
+                    </div>
+
+                    </div>
 
                 </template>
 
@@ -38,12 +45,9 @@
 
             </b-modal>
 
-
         </div>
 
-
     </div>
-
 
 </template>
 

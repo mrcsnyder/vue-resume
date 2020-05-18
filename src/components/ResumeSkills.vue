@@ -2,7 +2,7 @@
 
     <div>
 
-        <h2 class="trebuchet lg-headers text-center">Skills <i class="fas fa-code"></i></h2>
+        <h2 class="trebuchet lg-headers text-center">Skills <b-icon-code-slash class="text-muted" font-scale="1"></b-icon-code-slash></h2>
 
         <div v-if="skills.coding.length > 0">
             <h5 class="trebuchet text-muted">Coding</h5>

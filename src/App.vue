@@ -1,5 +1,6 @@
 <template>
   <b-container id="app">
+
     <navbar></navbar>
 
     <keep-alive>
@@ -7,6 +8,7 @@
     </keep-alive>
 
     <sticky-footer></sticky-footer>
+
   </b-container>
 </template>
 
@@ -38,13 +40,13 @@ export default {
 
   .modal-title{
     line-height:1 !important;
+    /*display: inline !important;*/
+
   }
 
-  body.modal-open {
-    /*overflow: hidden;*/
-    /*overflow: scroll !important;*/
-    overflow-y: auto !important;
-    /*padding-right: 0 !important;*/
+  .modal-header{
+    display: inline !important;
+    /*text-align: center;*/
   }
 
   img.img-thumbnail:active {
