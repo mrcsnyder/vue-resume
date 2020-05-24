@@ -1,16 +1,17 @@
 <template>
 
-            <div class="mx-auto">
+   <div class="mx-auto">
 
         <personal-details :personal="personal"/>
 
-            </div>
+   </div>
 
 </template>
 
 <script>
 
     import PersonalDetails from "./PersonalDetails";
+
     export default {
         name: 'About',
         components: {
@@ -29,8 +30,9 @@
 
             //get personal details from endpoint
             getPersonal() {
+                let self = this;
 
-                const url = this.urlPre + 'personal-details';
+                const url = self.urlPre + 'personal-details';
 
                 fetch(url, {
                     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -47,10 +49,14 @@
                     })
                     .then((data) => {
 
-                        this.personal = data;
+                        self.personal = data;
 
-                        console.log(this.personal);
-                    });
+                        console.log(self.personal);
+                    })
+                    .catch((error) => {
+                    self.errors = error.errors;
+                    console.log(self.errors);
+                });
 
 
             },

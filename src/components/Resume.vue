@@ -1,7 +1,7 @@
 <template>
     <div>
 
-            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-file-text font-scale="1"></b-icon-file-text> Resume <a class="btn btn-sm btn-dark" href="Chris_Snyder_Resume.pdf"><i class="fas fa-download"></i> PDF</a></h1>
+            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-file-text font-scale="1"></b-icon-file-text> Resume <a class="btn btn-sm btn-dark" :href="'http://resume-api.thisdudecodes.com/pdf-resume/'+this.resume" target="_blank"><i class="fas fa-download"></i> PDF</a></h1>
 
             <div class="row">
 
@@ -27,18 +27,18 @@
     import ResumeAwards from "./ResumeAwards";
     import ResumeSkills from "./ResumeSkills";
 
-
-
     export default {
         name: 'Resume',
 
         data() {
             return {
+                resume: '',
                 work: [],
                 education: [],
                 awards: {scholarships: [], honors: []},
                 skills: {coding: [], methods_devops: [], software: [], operating_systems: [], business: [] },
-                urlPre: 'http://resume-api.thisdudecodes.com/api/'
+                urlPre: 'http://resume-api.thisdudecodes.com/api/',
+
 
             }
         },
@@ -54,8 +54,42 @@
 
         methods: {
 
+            //get resume filename from endpoint
+            getResume() {
+
+                let self = this;
+
+                const url = self.urlPre + 'resume-pdf';
+
+                fetch(url, {
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                    // mode: 'no-cors', // no-cors, *cors, same-origin
+                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    // credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+
+                        self.resume = data[0];
+
+                        console.log(self.resume);
+                    })
+                    .catch((error) => {
+                    self.errors = error.errors;
+                    console.log(self.errors);
+                });
+
+            },
             //get educational background from endpoint
             getWork() {
+
+                let self = this;
 
                 const url = this.urlPre + 'work';
 
@@ -74,10 +108,14 @@
                     })
                     .then((data) => {
 
-                        this.work = data;
+                        self.work = data;
 
-                        console.log('test'+ this.work);
-                    });
+                        console.log('test'+ self.work);
+                    })
+                    .catch((error) => {
+                    self.errors = error.errors;
+                    console.log(self.errors);
+                });
 
 
             },
@@ -85,7 +123,9 @@
             //get skills from endpoint
             getSkills() {
 
-                const url = this.urlPre + 'skills';
+                let self = this;
+
+                const url = self.urlPre + 'skills';
 
                 fetch(url, {
                     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -102,15 +142,19 @@
                     })
                     .then((data) => {
 
-                        this.skills = data;
-                        this.skills.coding = data.coding;
-                        this.skills.methods_devops = data.methods_devops;
-                        this.skills.software = data.software;
-                        this.skills.operating_systems = data.operating_systems;
-                        this.skills.business = data.business;
+                        self.skills = data;
+                        self.skills.coding = data.coding;
+                        self.skills.methods_devops = data.methods_devops;
+                        self.skills.software = data.software;
+                        self.skills.operating_systems = data.operating_systems;
+                        self.skills.business = data.business;
 
-                        console.log(this.skills);
-                    });
+                        console.log(self.skills);
+                    })
+                    .catch((error) => {
+                    self.errors = error.errors;
+                    console.log(self.errors);
+                });
 
 
             },
@@ -118,7 +162,9 @@
             //get educational background from endpoint
             getEducation() {
 
-                const url = this.urlPre + 'education';
+                let self = this;
+
+                const url = self.urlPre + 'education';
 
                 fetch(url, {
                     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -135,17 +181,23 @@
                     })
                     .then((data) => {
 
-                        this.education = data;
-                        console.log(this.education);
+                        self.education = data;
+                        console.log(self.education);
+                    })
+                    .catch((error) => {
+                        self.errors = error.errors;
+                        console.log(self.errors);
                     });
 
 
             },
 
-            //get educational background from endpoint
+            //get educational awards from endpoint
             getAwards() {
 
-                const url = this.urlPre + 'education-awards';
+                let self = this;
+
+                const url = self.urlPre + 'education-awards';
 
                 fetch(url, {
                     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -163,10 +215,14 @@
                     .then((data) => {
 
                         console.log(data);
-                        this.awards.scholarships = data.scholarships;
-                        this.awards.honors = data.honors;
+                        self.awards.scholarships = data.scholarships;
+                        self.awards.honors = data.honors;
 
-                        console.log(this.awards);
+                        console.log(self.awards);
+                    })
+                    .catch((error) => {
+                        self.errors = error.errors;
+                        console.log(self.errors);
                     });
 
 
@@ -174,11 +230,14 @@
         },
 
         mounted() {
+           let self = this;
 
-           this.getWork();
-           this.getSkills();
-           this.getEducation();
-           this.getAwards();
+           //call the following methods when component is mounted to hit the following resume related endpoints:
+           self.getResume();
+           self.getWork();
+           self.getSkills();
+           self.getEducation();
+           self.getAwards();
 
         }
     }

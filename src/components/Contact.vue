@@ -1,6 +1,5 @@
 <template>
-
-
+    
 <div>
 
     <h1 id="contact_header" class="text-center trebuchet lg-headers"><b-icon-envelope-fill></b-icon-envelope-fill> Contact Chris</h1>
@@ -78,8 +77,6 @@
 </div>
 
 
-
-
 </template>
 
 <script>
@@ -87,7 +84,6 @@
         name: 'Contact',
 
         components: {
-
 
         },
 
@@ -174,7 +170,7 @@
         },
 
         mounted() {
-            // create reCaptcha async defer with createRecaptcha function
+            // create reCaptcha async defer with createRecaptcha method when Contact component is mounted
             this.createRecaptcha()
         },
 

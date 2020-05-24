@@ -77,8 +77,10 @@
 
             getProjects() {
 
+
                 const url = this.urlPre + 'portfolio-projects';
 
+                let self = this;
 
                 fetch(url, {
                     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -94,9 +96,13 @@
                     })
                     .then((data) => {
 
-                        this.projects = data;
-                        console.log(this.projects);
-                    });
+                        self.projects = data;
+                        console.log(self.projects);
+                    })
+                    .catch((error) => {
+                    self.errors = error.errors;
+                    console.log(self.errors);
+                });
 
 
             },

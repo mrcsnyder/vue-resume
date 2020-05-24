@@ -4,7 +4,7 @@
 
      <b-img data-toggle="modal" v-b-modal="'modal-'+ProjectId" @click="getProjectImages(ProjectId)" thumbnail :src="mainImage" />
 
-        <div class="lightbox" id="">
+        <div class="" id="">
 
             <b-modal
                      header-text-variant="light"
@@ -63,7 +63,6 @@
             return{
                 currentImg: 0,
                 gallery: [],
-                zoomed: false,
             }
         },
 
@@ -78,10 +77,12 @@
 
             getProjectImages(id){
 
-                //reset gallery index to zero
-                this.currentImg = 0;
+                let self = this;
 
-                const url = this.urlPre + 'portfolio-project/'+id;
+                //reset gallery index to zero
+                self.currentImg = 0;
+
+                const url = self.urlPre + 'portfolio-project/'+id;
 
                 fetch(url, {
                     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -97,9 +98,13 @@
                     })
                     .then((data) => {
 
-                        this.gallery = data;
-                        console.log(this.gallery);
-                    });
+                        self.gallery = data;
+                        console.log(self.gallery);
+                    })
+                    .catch((error) => {
+                    self.errors = error.errors;
+                    console.log(self.errors);
+                });
 
             },
 
@@ -129,12 +134,6 @@
             },
 
 
-//work on a zoom feature?
-            // zoomGallery(){
-            //
-            // },
-
-
         }
 
     }
@@ -143,11 +142,8 @@
 
 <style scoped>
 
-
     .gallery-description {
         font-size: 1rem;
-        /*line-height: 1 !important;*/
-
     }
 
     .gallery-counter{
