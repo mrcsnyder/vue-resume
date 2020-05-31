@@ -1,8 +1,14 @@
 
 import About from './components/About.vue';
 import Resume from './components/Resume.vue';
+// import Portfolio from './components/to-review/Portfolio.vue';
+
 import Portfolio from './components/Portfolio.vue';
+
 import Contact from './components/Contact.vue';
+
+import Porty from './components/Portfolio.vue';
+
 
 
 
@@ -37,6 +43,12 @@ export default {
         {
             path: '/contact',
             component: Contact
+
+        },
+
+        {
+            path: '/porty',
+            component: Porty
 
         },
 

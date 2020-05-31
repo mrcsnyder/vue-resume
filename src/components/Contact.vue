@@ -1,5 +1,5 @@
 <template>
-    
+
 <div>
 
     <h1 id="contact_header" class="text-center trebuchet lg-headers"><b-icon-envelope-fill></b-icon-envelope-fill> Contact Chris</h1>
