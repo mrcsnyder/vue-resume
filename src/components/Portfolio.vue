@@ -9,7 +9,7 @@
         <!--beginning of portfolio galleries-->
         <div class="row mx-auto">
 
-            <div class="col-sm-12 mt-5 col-md-6" v-for="project in projectors" :key="project.id">
+            <div class="col-sm-12 mt-5 col-md-6" v-for="project in projects" :key="project.id">
 
                 <div class="my-gallery" v-for="image in project.images" :key="image.id">
 
@@ -22,7 +22,6 @@
                                                                    :url-pre="urlPre"
                                                                    :fill-gallery="gallery"
                                                                    :main-image="'http://resume-api.thisdudecodes.com/images/thmb-'+image.file_name+''"
-                                                                   :gallery-length="galleryLength"
                                                 />
                                                  <figcaption itemprop="caption description">{{image.description}}</figcaption>
 
@@ -53,9 +52,6 @@
     export default {
         name: 'Portfolio',
 
-        //test endpoint for portfolio projects
-        //http://resume-api.thisdudecodes.com/api/portfolio-projects
-
         components: {
 
             PortfolioGallery,
@@ -65,10 +61,9 @@
         data(){
             return{
 
-                projectors: [],
+                projects: [],
                 gallery:[],
                 urlPre: 'http://resume-api.thisdudecodes.com/api/',
-                galleryLength: 0,
             }
 
         },
@@ -76,7 +71,6 @@
         methods: {
 
             getProjectors() {
-
 
                 const url = this.urlPre + 'portfolio-project-all';
 
@@ -96,24 +90,21 @@
                     })
                     .then((data) => {
 
-                        self.projectors = data;
-                        console.log(self.projectors);
+                        self.projects = data;
+                        // console.log(self.projectors);
                     })
                     .catch((error) => {
                         self.errors = error.errors;
                         console.log(self.errors);
                     });
 
-
             },
 
             //filter specific project and return all but the main image to pass to PortfolioGallery component
             getGallery(id) {
 
-                // this.gallery = [];
-
                 //get filter all projects to store specific project based on passed id to be able to use in next filter
-                let grabProject = this.projectors.filter((project) => project.id === id);
+                let grabProject = this.projects.filter((project) => project.id === id);
 
                 // filter specific project above and set gallery that is passed as a prop to the PortfolioGallery component
                 return grabProject.filter((project) => {
@@ -132,7 +123,7 @@
 
         },
 
-        
+
     }
 
 </script>

@@ -17,7 +17,7 @@
                     scrollable
             >
 
-                <template v-if="fillGallery.length > 0 && this.currentImg <= galleryLength" v-slot:modal-title="{ close }">
+                <template v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length" v-slot:modal-title="{ close }">
                     <b-button size="sm" class="float-right" variant="dark" @click="close()">
                         &times;
                     </b-button>
@@ -31,7 +31,6 @@
                         </div>
 
                         <div class="mt-1">
-
                             <span class="">{{fillGallery[currentImg].description}}</span>
                         </div>
 
@@ -39,7 +38,7 @@
 
                 </template>
 
-                <div class="" v-if="fillGallery.length > 0 && this.currentImg <= galleryLength">
+                <div class="" v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length">
                     <b-img class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+fillGallery[this.currentImg].file_name" />
 
                 </div>
@@ -72,7 +71,6 @@
             urlPre: String,
             mainImage: String,
             fillGallery: Array,
-            galleryLength: Number,
         },
 
         methods: {
