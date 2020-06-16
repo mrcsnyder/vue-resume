@@ -73,6 +73,7 @@
         props:{
 
             awards: Object,
+            awardsApp: Object,
 
         },
 
@@ -83,6 +84,7 @@
 
         mounted() {
 
+            console.log(this.awardsApp);
 
         }
 

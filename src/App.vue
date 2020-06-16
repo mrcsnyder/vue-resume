@@ -1,10 +1,10 @@
 <template>
-  <b-container id="app">
+  <b-container :awards-app="awardsApp" id="app">
 
     <navbar></navbar>
 
     <keep-alive>
-    <router-view class="mt-5"> </router-view>
+    <router-view class="mt-5" :projects-app="projectsApp" :personal-about="personalAbout"> </router-view>
     </keep-alive>
 
     <sticky-footer></sticky-footer>
@@ -22,7 +22,90 @@ export default {
   components: {
     Navbar,
     StickyFooter,
-  }
+  },
+
+
+  data(){
+    return{
+      personalData: [],
+      personalAbout:[{
+        id: null,
+        name:null,
+        profileImage:null,
+        role:null,
+        hobbiesInterests: null,
+        intro: null,
+        linkedIn: null,
+        gitSource: null,
+
+      }],
+      awardsApp: [],
+      skillsApp: [],
+      projectsApp:[],
+      urlPre: 'http://resume-api.thisdudecodes.com/api/',
+    }
+
+  },
+
+  methods: {
+
+    getPersonalData() {
+
+      const url = this.urlPre + 'personal-with-all/3';
+
+      let self = this;
+
+      fetch(url, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        // mode: 'no-cors', // no-cors, *cors, same-origin
+        // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        }})
+              .then((response) => {
+                return response.json();
+              })
+              .then((data) => {
+
+                self.personalData = data[0];
+
+                //test passing props
+               // self.awardsApp = self.personalData.awards;
+                self.projectsApp = self.personalData.projects;
+
+                //store personal details:
+                self.personalAbout[0].id = self.personalData.id;
+                self.personalAbout[0].name = self.personalData.name;
+                self.personalAbout[0].profileImage = self.personalData.profile_image;
+                self.personalAbout[0].intro = self.personalData.professional_intro;
+                self.personalAbout[0].gitSource = self.personalData.git_source;
+                self.personalAbout[0].linkedIn = self.personalData.linkedin;
+                self.personalAbout[0].role = self.personalData.current_role;
+                self.personalAbout[0].hobbiesInterests = self.personalData.hobbies_interests;
+
+
+                //console.log('Personal Data: '+self.personalData);
+                 console.log(self.personalData);
+              })
+              .catch((error) => {
+                self.errors = error.errors;
+                console.log(self.errors);
+              });
+
+    },
+
+  },
+
+  mounted() {
+
+    //call getProjects method when component is mounted
+    this.getPersonalData();
+
+  },
+
+
 }
 </script>
 

@@ -9,13 +9,12 @@
         <!--beginning of portfolio galleries-->
         <div class="row mx-auto">
 
-            <div class="col-sm-12 mt-5 col-md-6" v-for="project in projects" :key="project.id">
+            <div class="col-sm-12 mt-5 col-md-6" v-for="project in this.projectsApp" :key="project.id">
 
                 <div class="my-gallery" v-for="image in project.images" :key="image.id">
 
 
                     <figure @click="getGallery(project.id)" v-if="image.main_img === 1">
-
 
                                                 <portfolio-gallery :project-id="project.id"
                                                                    :project-title="project.title"
@@ -58,10 +57,14 @@
 
         },
 
+        props:{
+
+            projectsApp: Array,
+        },
+
         data(){
             return{
 
-                projects: [],
                 gallery:[],
                 urlPre: 'http://resume-api.thisdudecodes.com/api/',
             }
@@ -70,41 +73,11 @@
 
         methods: {
 
-            getProjectors() {
-
-                const url = this.urlPre + 'portfolio-project-all';
-
-                let self = this;
-
-                fetch(url, {
-                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                    // mode: 'no-cors', // no-cors, *cors, same-origin
-                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    // credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json'
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
-                    }})
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-
-                        self.projects = data;
-                        // console.log(self.projectors);
-                    })
-                    .catch((error) => {
-                        self.errors = error.errors;
-                        console.log(self.errors);
-                    });
-
-            },
-
             //filter specific project and return all but the main image to pass to PortfolioGallery component
             getGallery(id) {
 
                 //get filter all projects to store specific project based on passed id to be able to use in next filter
-                let grabProject = this.projects.filter((project) => project.id === id);
+                let grabProject = this.projectsApp.filter((project) => project.id === id);
 
                 // filter specific project above and set gallery that is passed as a prop to the PortfolioGallery component
                 return grabProject.filter((project) => {
@@ -117,9 +90,6 @@
         },
 
         mounted() {
-
-            //call getProjects method when component is mounted
-            this.getProjectors();
 
         },
 
