@@ -1,13 +1,13 @@
 <template>
     <div>
 
-            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-file-text font-scale="1"></b-icon-file-text> Resume <a class="btn btn-sm btn-dark" :href="'http://resume-api.thisdudecodes.com/pdf-resume/'+this.resume" target="_blank"><i class="fas fa-download"></i> PDF</a></h1>
+            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-file-text font-scale="1"></b-icon-file-text> Resume <a class="btn btn-sm btn-dark" :href="'http://resume-api.thisdudecodes.com/pdf-resume/'+resumeLink" target="_blank"><i class="fas fa-download"></i> PDF</a></h1>
 
             <div class="row">
 
                 <div class="col-lg-8 col-12 mt-2">
-                   <resume-work :work="work"></resume-work>
-                   <resume-education :education="education"/>
+                   <resume-work :work="resumeWork"></resume-work>
+                   <resume-education :education="resumeEducation"/>
                    <resume-awards :awards="awards"/>
                 </div>
 
@@ -30,15 +30,18 @@
     export default {
         name: 'Resume',
 
+        props: {
+            resumeWork: Array,
+            resumeEducation: Array,
+            resumeLink: String,
+            resumeSkills: Array,
+        },
+
         data() {
             return {
-                resume: '',
-                work: [],
-                education: [],
                 awards: {scholarships: [], honors: []},
                 skills: {coding: [], methods_devops: [], software: [], operating_systems: [], business: [] },
                 urlPre: 'http://resume-api.thisdudecodes.com/api/',
-
 
             }
         },
@@ -53,72 +56,6 @@
 
 
         methods: {
-
-            //get resume filename from endpoint
-            getResume() {
-
-                let self = this;
-
-                const url = self.urlPre + 'resume-pdf';
-
-                fetch(url, {
-                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                    // mode: 'no-cors', // no-cors, *cors, same-origin
-                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    // credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json'
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
-                    }
-                })
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-
-                        self.resume = data[0];
-
-                        console.log(self.resume);
-                    })
-                    .catch((error) => {
-                    self.errors = error.errors;
-                    console.log(self.errors);
-                });
-
-            },
-            //get educational background from endpoint
-            getWork() {
-
-                let self = this;
-
-                const url = this.urlPre + 'work';
-
-                fetch(url, {
-                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                    // mode: 'no-cors', // no-cors, *cors, same-origin
-                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    // credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json'
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
-                    }
-                })
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-
-                        self.work = data;
-
-                        console.log('test'+ self.work);
-                    })
-                    .catch((error) => {
-                    self.errors = error.errors;
-                    console.log(self.errors);
-                });
-
-
-            },
 
             //get skills from endpoint
             getSkills() {
@@ -159,39 +96,6 @@
 
             },
 
-            //get educational background from endpoint
-            getEducation() {
-
-                let self = this;
-
-                const url = self.urlPre + 'education';
-
-                fetch(url, {
-                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                    // mode: 'no-cors', // no-cors, *cors, same-origin
-                    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    // credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json'
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
-                    }
-                })
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-
-                        self.education = data;
-                        console.log(self.education);
-                    })
-                    .catch((error) => {
-                        self.errors = error.errors;
-                        console.log(self.errors);
-                    });
-
-
-            },
-
             //get educational awards from endpoint
             getAwards() {
 
@@ -227,19 +131,43 @@
 
 
             },
+
+            //
+            // filterSkills(){
+            //
+            //    const self = this;
+            //
+            //    self.skills.coding  = self.resumeSkills.filter((skills) => skills.category === 'coding');
+            //    self.skills.methods_devops  = self.resumeSkills.filter((skills) => skills.category === 'methods_devops');
+            //    self.skills.software  = self.resumeSkills.filter((skills) => skills.category === 'software');
+            //    self.skills.operating_systems  = self.resumeSkills.filter((skills) => skills.category === 'operating_systems');
+            //    self.skills.business  = self.resumeSkills.filter((skills) => skills.category === 'business');
+            //
+            //    // console.log(self.skills.coding);
+            //     return self.skills;
+            //
+            // },
+
+        },
+
+        computed: {
+
         },
 
         mounted() {
-           let self = this;
+           const self = this;
 
            //call the following methods when component is mounted to hit the following resume related endpoints:
-           self.getResume();
-           self.getWork();
-           self.getSkills();
-           self.getEducation();
+           //self.getSkills();
+           // self.filterSkills();
+
            self.getAwards();
 
-        }
+        },
+
+        // created(){
+        //     this.filterSkills();
+        // }
     }
 </script>
 

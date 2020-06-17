@@ -4,7 +4,15 @@
     <navbar></navbar>
 
     <keep-alive>
-    <router-view class="mt-5" :projects-app="projectsApp" :personal-about="personalAbout"> </router-view>
+    <router-view class="mt-5"
+                 :projects-app="projectsApp"
+                 :personal-about="personalAbout"
+                 :resume-link="resumeLink"
+                 :resume-work="resumeWork"
+                 :resume-education="resumeEdu"
+                 :resume-skills="resumeSkills"
+
+    > </router-view>
     </keep-alive>
 
     <sticky-footer></sticky-footer>
@@ -39,6 +47,10 @@ export default {
         gitSource: null,
 
       }],
+      resumeLink: null,
+      resumeWork: [],
+      resumeEdu: [],
+      resumeSkills: [],
       awardsApp: [],
       skillsApp: [],
       projectsApp:[],
@@ -49,13 +61,13 @@ export default {
 
   methods: {
 
-    getPersonalData() {
+    async getPersonalData() {
 
       const url = this.urlPre + 'personal-with-all/3';
 
       let self = this;
 
-      fetch(url, {
+      await fetch(url, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         // mode: 'no-cors', // no-cors, *cors, same-origin
         // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -85,6 +97,12 @@ export default {
                 self.personalAbout[0].role = self.personalData.current_role;
                 self.personalAbout[0].hobbiesInterests = self.personalData.hobbies_interests;
 
+                //resume data:
+                self.resumeLink = self.personalData.resume;
+                self.resumeWork = self.personalData.work;
+                self.resumeEdu = self.personalData.education;
+                self.resumeSkills = self.personalData.skills;
+
 
                 //console.log('Personal Data: '+self.personalData);
                  console.log(self.personalData);
@@ -98,13 +116,11 @@ export default {
 
   },
 
-  mounted() {
+mounted() {
+//call getProjects method when component is mounted
+  this.getPersonalData();
 
-    //call getProjects method when component is mounted
-    this.getPersonalData();
-
-  },
-
+},
 
 }
 </script>
