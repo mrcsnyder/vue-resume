@@ -11,6 +11,7 @@
                  :resume-work="resumeWork"
                  :resume-education="resumeEdu"
                  :resume-skills="resumeSkills"
+                 :resume-awards="resumeAwards"
 
     > </router-view>
     </keep-alive>
@@ -50,7 +51,8 @@ export default {
       resumeLink: null,
       resumeWork: [],
       resumeEdu: [],
-      resumeSkills: [],
+      resumeSkills: { coding: [], methods_devops: [], software: [], operating_systems: [], business: [] },
+      resumeAwards: { scholarships:[], honors: [] },
       awardsApp: [],
       skillsApp: [],
       projectsApp:[],
@@ -101,7 +103,16 @@ export default {
                 self.resumeLink = self.personalData.resume;
                 self.resumeWork = self.personalData.work;
                 self.resumeEdu = self.personalData.education;
-                self.resumeSkills = self.personalData.skills;
+                //resume -> skills data:
+                self.resumeSkills.coding = self.personalData.coding_skills;
+                self.resumeSkills.methods_devops = self.personalData.methods_devops_skills;
+                self.resumeSkills.software = self.personalData.software_skills;
+                self.resumeSkills.operating_systems = self.personalData.operating_systems_skills;
+                self.resumeSkills.business = self.personalData.business_skills;
+
+                //resume -> awards data:
+                self.resumeAwards.scholarships = self.personalData.scholarships;
+                self.resumeAwards.honors = self.personalData.honors;
 
 
                 //console.log('Personal Data: '+self.personalData);

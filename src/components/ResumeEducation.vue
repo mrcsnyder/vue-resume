@@ -73,12 +73,10 @@
 
         components: {
 
-
         },
 
         data(){
             return{
-                degrees: [],
 
             }
 
@@ -92,11 +90,9 @@
 
         methods:{
 
-
         },
 
         mounted() {
-
 
         }
 

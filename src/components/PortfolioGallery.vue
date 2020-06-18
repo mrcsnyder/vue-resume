@@ -4,7 +4,6 @@
 
         <b-img data-toggle="modal" v-b-modal="'modal-'+ProjectId" thumbnail :src="mainImage" />
 
-
         <div class="" id="">
 
             <b-modal
@@ -40,7 +39,6 @@
 
                 <div class="" v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length">
                     <b-img class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+fillGallery[this.currentImg].file_name" />
-
                 </div>
 
             </b-modal>
@@ -99,7 +97,6 @@
                     this.currentImg = this.fillGallery.length - 1;
                 }
             },
-
 
         },
 

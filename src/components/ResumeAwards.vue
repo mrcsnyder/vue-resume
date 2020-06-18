@@ -1,6 +1,6 @@
 <template>
 
-    <div v-if="Object.keys(awards).length > 0">
+    <div v-if="Object.keys(awards).length > 0" >
         <h2 class="trebuchet lg-headers"><font-awesome-icon :icon="['fas', 'award']" /> Awards</h2>
     <div>
 
@@ -60,7 +60,6 @@
 
         components: {
 
-
         },
 
         data(){
@@ -73,7 +72,6 @@
         props:{
 
             awards: Object,
-            awardsApp: Object,
 
         },
 
@@ -83,8 +81,6 @@
         },
 
         mounted() {
-
-            console.log(this.awardsApp);
 
         }
 
