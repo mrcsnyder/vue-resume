@@ -17,7 +17,7 @@
             >
 
                 <template v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length" v-slot:modal-title="{ close }">
-                    <b-button size="sm" class="float-right" variant="dark" @click="close()">
+                    <b-button size="sm" class="float-right" variant="dark" @click="close(); notLoaded();">
                         &times;
                     </b-button>
 
@@ -37,8 +37,10 @@
 
                 </template>
 
-                <div class="" v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length">
-                    <b-img class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+fillGallery[this.currentImg].file_name" />
+                <div  class="" v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length">
+                    <transition name="fade">
+                    <b-img v-show="isLoad" @load="loaded" class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+fillGallery[this.currentImg].file_name" />
+                    </transition>
                 </div>
 
             </b-modal>
@@ -60,6 +62,7 @@
         data() {
             return{
                 currentImg: 0,
+                isLoad: false,
             }
         },
 
@@ -75,6 +78,7 @@
 
             galleryNext(){
 
+                this.isLoad = false;
                 if(this.currentImg < (this.fillGallery.length - 1)){
                     this.currentImg +=1;
                 }
@@ -87,6 +91,7 @@
             },
 
             galleryPrev(){
+                this.isLoad = false;
                 if(this.currentImg > 0){
 
                     this.currentImg --;
@@ -96,6 +101,14 @@
                     // go to the last image if going one past zero
                     this.currentImg = this.fillGallery.length - 1;
                 }
+            },
+
+            loaded(){
+                this.isLoad = true;
+            },
+
+            notLoaded(){
+                this.isLoad = false;
             },
 
         },
@@ -142,6 +155,19 @@
     .prev:hover,
     .next:hover {
         background-color: rgba(119, 119, 119, 0.3);
+    }
+
+    /* gallery image transition effects */
+    .fade-enter-active {
+        transition: opacity 1s ease-in-out;
+    }
+
+    .fade-enter-to {
+        opacity: 1;
+    }
+
+    .fade-enter {
+        opacity: 0;
     }
 
 

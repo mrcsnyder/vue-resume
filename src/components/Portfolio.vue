@@ -18,8 +18,8 @@
 
                                                 <portfolio-gallery :project-id="project.id"
                                                                    :project-title="project.title"
-                                                                   :url-pre="urlPre"
                                                                    :fill-gallery="gallery"
+                                                                   :key="gallery.file_name"
                                                                    :main-image="'http://resume-api.thisdudecodes.com/images/thmb-'+image.file_name+''"
                                                 />
                                                  <figcaption itemprop="caption description">{{image.description}}</figcaption>
@@ -74,17 +74,19 @@
         methods: {
 
             //filter specific project and return all but the main image to pass to PortfolioGallery component
-            getGallery(id) {
+             getGallery(id) {
 
-                //get filter all projects to store specific project based on passed id to be able to use in next filter
-                let grabProject = this.projectsApp.filter((project) => project.id === id);
 
-                // filter specific project above and set gallery that is passed as a prop to the PortfolioGallery component
-                return grabProject.filter((project) => {
+                     //get filter all projects to store specific project based on passed id to be able to use in next filter
+                     let grabProject = this.projectsApp.filter((project) => project.id === id);
 
-                    this.gallery = project.images.filter((image) => image.main_img === 0);
-                    this.galleryLength = this.gallery.length;
-                })
+                     // filter specific project above and set gallery that is passed as a prop to the PortfolioGallery component
+                     return grabProject.filter((project) => {
+
+                         this.gallery = project.images.filter((image) => image.main_img === 0);
+
+                     })
+
             }
 
         },
