@@ -2,8 +2,9 @@
   <b-container :awards-app="awardsApp" id="app">
 
     <navbar></navbar>
+<div v-if="isLoaded">
 
-    <keep-alive>
+  <keep-alive>
     <router-view class="mt-5"
                  :projects-app="projectsApp"
                  :personal-about="personalAbout"
@@ -14,7 +15,16 @@
                  :resume-awards="resumeAwards"
 
     > </router-view>
-    </keep-alive>
+  </keep-alive>
+
+
+</div>
+    <div v-if="!isLoaded" class="text-center">
+
+        <b-img fluid-grow :src="require('./assets/loading.gif')" />
+
+    </div>
+
 
     <sticky-footer></sticky-footer>
 
@@ -36,6 +46,7 @@ export default {
 
   data(){
     return{
+      isLoaded: false,
       personalData: [],
       personalAbout:[{
         id: null,
@@ -117,6 +128,7 @@ export default {
 
                 //console.log('Personal Data: '+self.personalData);
                  console.log(self.personalData);
+                 self.isLoaded = true;
               })
               .catch((error) => {
                 self.errors = error.errors;
