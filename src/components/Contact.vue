@@ -25,7 +25,7 @@
                     <label class="resume-label" for="name">Name</label>
                    <span>
                        <br/>
-                       <label v-if="this.errors.name && this.name === '' " class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.name[0] }}</label>
+                       <label v-if="this.errors.name && !this.name" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.name[0] }}</label>
                    </span>
                     <div data-role="fieldcontainer">
                         <input class="form-control" type="text" id="name" name="name" v-model="name" placeholder="Please Enter Your Name"/>
@@ -37,9 +37,8 @@
                     <label class="resume-label" for="email">E-mail</label>
                     <span>
                        <br/>
-                       <label v-if="this.errors.email && this.email === '' " class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.email[0] }}</label>
+                       <label v-if="this.errors.email && !this.email" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.email[0] }}</label>
                        <label v-else-if="this.errors.email && !validEmail() " class="error"><b-icon icon="alert-circle-fill" variant="dark"/> Please enter in your real email address!</label>
-
                     </span>
 
                     <div data-role="fieldcontainer">
@@ -52,7 +51,7 @@
                     <label class="resume-label" for="message">Message</label>
                     <span>
                        <br/>
-                       <label v-if="this.errors.message && this.message === '' " class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.message[0] }}</label>
+                       <label v-if="this.errors.message && !this.message" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.message[0] }}</label>
                    </span>
                     <div data-role="fieldcontainer">
                         <textarea class="form-control" id="message" name="message" v-model="message"
@@ -90,11 +89,11 @@
         data(){
             return{
 
-                message: '',
-                captchaResponse: '',
-                email: '',
+                message: null,
+                captchaResponse: null,
+                email: null,
                 emailFormat: false,
-                name: '',
+                name: "",
                 errors: [],
                 sending: false,
                 sent: false,
@@ -114,22 +113,33 @@
                 self.captchaResponse = captchaDiv.querySelector('.g-recaptcha-response').value;
 
 
-                const data = { name: self.name, email: self.email, message: self.message, captyResponse: self.captchaResponse };
+                let emailData = JSON.stringify({ name: self.name, email: self.email, message: self.message, captyResponse: self.captchaResponse });
 
-                fetch('http://resume-api.thisdudecodes.com/resume/send-contact', {
+              //play around with this and maybe refactor how the error messages come out.
+              // maybe on the input logic, make that an OR and then display the same message you would get from the backend?
+              self.sending = !!(self.message && self.email && self.name && self.captchaResponse);
+
+
+                fetch('https://resume-api.thisdudecodes.com/resume/send-contact', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                  //play around with this part and see if you can get it to work faster so less of a delay after clicking the 'Send Message' button
+                    body: emailData
+
+
                 })
                     .then(
                     function(data) {
+
                         let json = data.json();
+
                         if (data.status >= 200 && data.status < 300) {
                             //set sending to true then set a timer for 2-3 seconds before sent is set to true
-                            self.sending = true;
+                            // self.sending = true;
+
                             setTimeout(self.emailSent, 3000); // in 3 seconds call emailSent method
 
                             return json;

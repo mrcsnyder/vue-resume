@@ -67,7 +67,7 @@ export default {
       awardsApp: [],
       skillsApp: [],
       projectsApp:[],
-      urlPre: 'http://resume-api.thisdudecodes.com/api/',
+      urlPre: 'https://resume-api.thisdudecodes.com/api/',
     }
 
   },
@@ -76,7 +76,7 @@ export default {
 
     async getPersonalData() {
 
-      const url = this.urlPre + 'personal-with-all/3';
+      const url = this.urlPre + 'personal-with-all/1';
 
       let self = this;
 

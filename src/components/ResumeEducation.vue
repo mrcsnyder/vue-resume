@@ -7,7 +7,7 @@
 
            <span class="badge badge-dark mb-2 trebuchet">{{edu.start_month_year_format}} - {{edu.end_month_year_format}}</span>
            <br/>
-           <h3 class="trebuchet h3-resume h3-school-title"><img class="img-fluid school-logo" :src="'http://resume-api.thisdudecodes.com/images/'+edu.logo" :alt="''+edu.school_name"> {{edu.school_name}}</h3>
+           <h3 class="trebuchet h3-resume h3-school-title"><img class="img-fluid school-logo" :src="'https://resume-api.thisdudecodes.com/images/education/'+edu.logo" :alt="''+edu.school_name"> {{edu.school_name}}</h3>
            <p class="calibri">{{edu.details}}</p>
 
            <div v-if="edu.degrees.length > 0">

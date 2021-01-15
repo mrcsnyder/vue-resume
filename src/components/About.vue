@@ -4,13 +4,12 @@
 
        <div v-if="personalAbout.length > 0">
 
-
            <div v-for="person in personalAbout" :key="person.id">
 
                <div class="row">
 
                    <div v-if="person.profileImage" class="col-lg-3 offset-lg-3 col-md-12 col-sm-12 col-12 order-1 order-lg-1 order-sm-1">
-                       <img :title="''+person.name+'\n'+ person.role+''" :src="'http://resume-api.thisdudecodes.com/images/'+person.profileImage" id="portrait-img" class="img-fluid portrait-about mx-auto d-block rounded-circle" :alt="person.name">
+                       <img :title="''+person.name+'\n'+ person.role+''" :src="'https://resume-api.thisdudecodes.com/images/personal/'+person.profileImage" id="portrait-img" class="img-fluid portrait-about mx-auto d-block rounded-circle" :alt="person.name">
 
                    </div>
 
