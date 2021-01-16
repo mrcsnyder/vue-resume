@@ -39,7 +39,7 @@
 
                 <div  class="" v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length">
                     <transition name="fade">
-                    <b-img v-show="isLoad" @load="loaded" class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/'+fillGallery[this.currentImg].file_name" />
+                    <b-img v-show="isLoad" @load="loaded" class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/portfolio-gallery-images/'+fillGallery[this.currentImg].file_name" />
                     </transition>
                 </div>
 
@@ -140,7 +140,7 @@
         color: #777777;
         font-weight: bold;
         font-size: 2rem !important;
-        transition: 0.6s ease;
+        transition: 0.4s ease;
         user-select: none;
         -webkit-user-select: none;
     }
