@@ -26,27 +26,27 @@
 
     </div>
 
-    <div v-if="awards.scholarships.length > 0">
+<!--    <div v-if="awards.scholarships.length > 0">-->
 
-        <h5 class="trebuchet text-muted">Honors</h5>
-        <table class="table calibri">
-            <thead class="thead-dark">
-            <tr class="d-flex">
-                <th class="col-6" scope="col"> Honor</th>
-                <th class="col-6" scope="col">Awarded</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="honor in awards.honors" :key="honor.id" class="d-flex">
-                <td class="col-6">{{honor.award_name}}</td>
-                <td class="col-6">{{honor.date_range}}</td>
-            </tr>
-            </tbody>
-        </table>
+<!--        <h5 class="trebuchet text-muted">Honors</h5>-->
+<!--        <table class="table calibri">-->
+<!--            <thead class="thead-dark">-->
+<!--            <tr class="d-flex">-->
+<!--                <th class="col-6" scope="col"> Honor</th>-->
+<!--                <th class="col-6" scope="col">Awarded</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr v-for="honor in awards.honors" :key="honor.id" class="d-flex">-->
+<!--                <td class="col-6">{{honor.award_name}}</td>-->
+<!--                <td class="col-6">{{honor.date_range}}</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
 
-    </div>
+<!--    </div>-->
 
-    <hr/>
+<!--    <hr/>-->
 
     </div>
 

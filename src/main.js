@@ -5,7 +5,7 @@ import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons'
-import { faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faSmile, faSmileWink } from '@fortawesome/free-solid-svg-icons'
+import { faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faSmile, faSmileWink, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -29,7 +29,7 @@ Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 
 //use fontawesome
-library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faLinkedin, faGithubSquare, faSmile, faSmileWink );
+library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faLinkedin, faGithubSquare, faSmile, faSmileWink, faExclamationCircle );
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

@@ -8,7 +8,7 @@
         <h1 class="trebuchet text-center">Thank you for Contacting Me!</h1>
         <div id="contact_success_words">
             <p class="text-center calibri main-text">I will do my best to get back to you as soon as possible!</p>
-            <p class="text-center calibri main-text">Thank you and have an excellent day! <font-awesome-icon :icon="['fa', 'smile-wink']" size="2x" /></p>
+            <p class="text-center calibri main-text">Thank you and have an excellent day! <font-awesome-icon :icon="['fa', 'smile']" size="2x" /></p>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
                     <label class="resume-label" for="name">Name</label>
                    <span>
                        <br/>
-                       <label v-if="this.errors.name && !this.name" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.name[0] }}</label>
+                       <label v-if="this.validations.name && !this.name" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> <font-awesome-icon :icon="['fa', 'exclamation-circle']" size="1x" /> {{ validations.name }}</label>
                    </span>
                     <div data-role="fieldcontainer">
                         <input class="form-control" type="text" id="name" name="name" v-model="name" placeholder="Please Enter Your Name"/>
@@ -37,8 +37,8 @@
                     <label class="resume-label" for="email">E-mail</label>
                     <span>
                        <br/>
-                       <label v-if="this.errors.email && !this.email" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.email[0] }}</label>
-                       <label v-else-if="this.errors.email && !validEmail() " class="error"><b-icon icon="alert-circle-fill" variant="dark"/> Please enter in your real email address!</label>
+                       <label v-if="this.validations.email && !this.email" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> <font-awesome-icon :icon="['fa', 'exclamation-circle']" size="1x" /> {{ validations.email }}</label>
+                       <label v-else-if="this.validations.email && !validEmail()" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> Please enter in your real email address!</label>
                     </span>
 
                     <div data-role="fieldcontainer">
@@ -51,7 +51,7 @@
                     <label class="resume-label" for="message">Message</label>
                     <span>
                        <br/>
-                       <label v-if="this.errors.message && !this.message" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.message[0] }}</label>
+                       <label v-if="this.validations.message && !this.message" class="error"><b-icon icon="alert-circle-fill" variant="dark"/> <font-awesome-icon :icon="['fa', 'exclamation-circle']" size="1x" /> {{ validations.message }}</label>
                    </span>
                     <div data-role="fieldcontainer">
                         <textarea class="form-control" id="message" name="message" v-model="message"
@@ -61,7 +61,7 @@
             </div>
         <span>
             <br/>
-            <label v-if="this.errors.captyResponse && this.captchaResponse === '' " class="error"><b-icon icon="alert-circle-fill" variant="dark"/> {{ errors.captyResponse[0] }}</label>
+            <label v-if="this.validations.captyResponse && this.captchaResponse === '' " class="error"><b-icon icon="alert-circle-fill" variant="dark"/><font-awesome-icon :icon="['fa', 'exclamation-circle']" size="1x" /> {{ validations.captyResponse }}</label>
 
         </span>
             <div id="captyCapn" class="g-recaptcha" data-sitekey="6Lc6uOUUAAAAAD06XtOzaXtr-2DoC15zQ4fh0mj4"></div>
@@ -69,12 +69,9 @@
             <input class="btn btn-lg btn-dark" type="submit" @click="sendContact()" value="Send Message" id="submit"/>
             <br/>
             <br/>
-
     </div>
 
-
 </div>
-
 
 </template>
 
@@ -94,9 +91,10 @@
                 email: null,
                 emailFormat: false,
                 name: "",
-                errors: [],
+                errors: [], //this is the server errors array as fallback
                 sending: false,
                 sent: false,
+                validations: {name: null, email: null, message: null, captyResponse: null},
 
             }
 
@@ -113,30 +111,31 @@
                 self.captchaResponse = captchaDiv.querySelector('.g-recaptcha-response').value;
 
 
-                let emailData = JSON.stringify({ name: self.name, email: self.email, message: self.message, captyResponse: self.captchaResponse });
+              if(self.validateForm()) {
 
-              //play around with this and maybe refactor how the error messages come out.
-              // maybe on the input logic, make that an OR and then display the same message you would get from the backend?
-              self.sending = !!(self.message && self.email && self.name && self.captchaResponse);
+
+                self.sending = true;
+
+                let emailData = JSON.stringify({ name: self.name, email: self.email, message: self.message, captyResponse: self.captchaResponse });
 
 
                 fetch('https://resume-api.thisdudecodes.com/resume/send-contact', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  },
                   //play around with this part and see if you can get it to work faster so less of a delay after clicking the 'Send Message' button
-                    body: emailData
+                  body: emailData
 
 
                 })
                     .then(
-                    function(data) {
+                        function(data) {
 
-                        let json = data.json();
+                          let json = data.json();
 
-                        if (data.status >= 200 && data.status < 300) {
+                          if (data.status >= 200 && data.status < 300) {
                             //set sending to true then set a timer for 2-3 seconds before sent is set to true
                             // self.sending = true;
 
@@ -144,19 +143,21 @@
 
                             return json;
 
-                        } else {
+                          } else {
 
                             return json.then(Promise.reject.bind(Promise));
+                          }
                         }
-                    }
-                ).catch((error) => {
-                    self.errors = error.errors;
-                    console.log(self.errors);
+                    ).catch((error) => {
+                  self.errors = error.errors;
+                  console.log(self.errors);
                 });
+              }
+
 
             },
 
-            createRecaptcha () {
+            createRecaptcha() {
                 let script = document.createElement('script')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
@@ -165,6 +166,34 @@
                 document.getElementsByTagName('head')[0].appendChild(script)
 
             },
+
+          validateForm() {
+
+            let self = this;
+
+            if (self.name && self.email && self.message) {
+              return true;
+            }
+
+            self.validations = [];
+
+            if (!self.name) {
+              self.validations.name = 'Please tell me your name so I know who is contacting me!';
+            }
+            if (!self.email) {
+              self.validations.email = 'Please enter your email address so I know where to send a response to!';
+            }
+
+            if (!self.message) {
+              self.validations.message = 'Please let me know why you are contacting me!';
+            }
+
+            if(!self.captchaResponse || self.captchaResponse === '') {
+              self.validations.captyResponse = 'reCAPTCHA is required to prove you are a human!';
+            }
+
+
+          },
 
             validEmail() {
 
@@ -183,7 +212,6 @@
             // create reCaptcha async defer with createRecaptcha method when Contact component is mounted
             this.createRecaptcha()
         },
-
 
     }
 
