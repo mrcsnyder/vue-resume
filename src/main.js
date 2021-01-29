@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-
-
 //fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -24,7 +22,6 @@ import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-
 //use BootstrapVue as a plugin...
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
@@ -32,12 +29,9 @@ Vue.use(BootstrapVueIcons);
 //use fontawesome
 library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faLinkedin, faGithubSquare, faSmile, faSmileWink, faExclamationCircle );
 
-// var routey = new VueRouter({
-//   routes: routes,
-// });
-
 var routey = new VueRouter(routes);
 
+//define dynamic component page titles...
 routey.beforeEach((toRoute, fromRoute, next) => {
   window.document.title = toRoute.meta && toRoute.meta.title ? 'ThisDudeCodes.com | '+toRoute.meta.title : 'ThisDudeCodes.com';
 
@@ -49,7 +43,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 //use VueRouter as a plugin...
  Vue.use(VueRouter);
 
-
 //add uppercase filter for searches
 Vue.filter('uppercase', function (value) {
   return value.toUpperCase();
@@ -57,9 +50,6 @@ Vue.filter('uppercase', function (value) {
 Vue.config.productionTip = false
 
 new Vue({
-  //router: new VueRouter(routes),
    router: routey,
-
-
   render: h => h(App),
 }).$mount('#app')
