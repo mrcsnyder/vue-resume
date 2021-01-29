@@ -1,19 +1,9 @@
-
 import About from './components/About.vue';
 import Resume from './components/Resume.vue';
-// import Portfolio from './components/to-review/Portfolio.vue';
-
 import Portfolio from './components/Portfolio.vue';
-
 import Contact from './components/Contact.vue';
 
-import Porty from './components/Portfolio.vue';
-
-
-
-
-
-export default {
+export default  {
 
     mode: 'history',
 
@@ -24,35 +14,39 @@ export default {
 
         {
             path: '/',
-            component: About
+            component: About,
+            meta: {
+                title: 'About Chris'
+            }
 
         },
 
         {
             path: '/resume',
-            component: Resume
+            component: Resume,
+            meta: {
+                title: 'Resume'
+            }
 
         },
 
         {
             path: '/portfolio',
-            component: Portfolio
+            component: Portfolio,
+            meta: {
+                title: 'Project Portfolio'
+            }
 
         },
 
         {
             path: '/contact',
-            component: Contact
+            component: Contact,
+            meta: {
+                title: 'Contact Chris'
+            }
 
         },
-
-        {
-            path: '/porty',
-            component: Porty
-
-        },
-
-
 
     ]
 

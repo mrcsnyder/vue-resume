@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+
+
 //fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -22,7 +24,6 @@ import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-// import { VueReCaptcha } from "vue-recaptcha-v3";
 
 //use BootstrapVue as a plugin...
 Vue.use(BootstrapVue);
@@ -31,13 +32,23 @@ Vue.use(BootstrapVueIcons);
 //use fontawesome
 library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faLinkedin, faGithubSquare, faSmile, faSmileWink, faExclamationCircle );
 
+// var routey = new VueRouter({
+//   routes: routes,
+// });
+
+var routey = new VueRouter(routes);
+
+routey.beforeEach((toRoute, fromRoute, next) => {
+  window.document.title = toRoute.meta && toRoute.meta.title ? 'ThisDudeCodes.com | '+toRoute.meta.title : 'ThisDudeCodes.com';
+
+  next();
+})
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 //use VueRouter as a plugin...
-Vue.use(VueRouter);
+ Vue.use(VueRouter);
 
-// Vue.use(VueReCaptcha, { siteKey: "6LfYm9EUAAAAAJ5fJ61xA5BY2edImwTnGvXG6iet" });
 
 //add uppercase filter for searches
 Vue.filter('uppercase', function (value) {
@@ -46,6 +57,9 @@ Vue.filter('uppercase', function (value) {
 Vue.config.productionTip = false
 
 new Vue({
-router: new VueRouter(routes),
+  //router: new VueRouter(routes),
+   router: routey,
+
+
   render: h => h(App),
 }).$mount('#app')

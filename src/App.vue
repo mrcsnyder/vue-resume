@@ -68,6 +68,7 @@ export default {
       skillsApp: [],
       projectsApp:[],
       urlPre: 'https://resume-api.thisdudecodes.com/api/',
+      title: 'Testerson McTesterson'
     }
 
   },
