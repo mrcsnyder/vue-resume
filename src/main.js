@@ -45,9 +45,9 @@ router.beforeEach((toRoute, fromRoute, next) => {
 
 // Configuration VueAnalytics
 Vue.use(VueAnalytics, {
-    id: 'UA-78689488-1',
-    // linkers: ['localhost'],
+    id: 'UA-137370451-1',
     router,
+    // sendHitTask: window.location.hostname !== "localhost",
     debug: {
         enabled: false
     }
