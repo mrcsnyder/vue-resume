@@ -15,6 +15,11 @@ import VueRouter from 'vue-router';
 //import routes file
 import routes from './routes';
 
+//import vue-analytics for Google Analytics integration:
+import VueAnalytics from 'vue-analytics';
+
+
+
 //import VueBootstrap...
 import {BootstrapVue, BootstrapVueIcons} from 'bootstrap-vue'
 
@@ -29,14 +34,24 @@ Vue.use(BootstrapVueIcons);
 //use fontawesome
 library.add(faUserGraduate, faLaptopCode, faAward, faGuitar, faBicycle, faEnvelopeSquare, faLinkedin, faGithubSquare, faSmile, faSmileWink, faExclamationCircle );
 
-var routey = new VueRouter(routes);
+const router = new VueRouter(routes);
 
 //define dynamic component page titles...
-routey.beforeEach((toRoute, fromRoute, next) => {
+router.beforeEach((toRoute, fromRoute, next) => {
   window.document.title = toRoute.meta && toRoute.meta.title ? 'ThisDudeCodes.com | '+toRoute.meta.title : 'ThisDudeCodes.com';
 
   next();
 })
+
+// Configuration VueAnalytics
+Vue.use(VueAnalytics, {
+    id: 'UA-78689488-1',
+    // linkers: ['localhost'],
+    router,
+    debug: {
+        enabled: false
+    }
+});
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -50,6 +65,6 @@ Vue.filter('uppercase', function (value) {
 Vue.config.productionTip = false
 
 new Vue({
-   router: routey,
+   router: router,
   render: h => h(App),
 }).$mount('#app')

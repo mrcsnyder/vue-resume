@@ -3,7 +3,7 @@
         <b-nav tabs class="mt-3" align="center">
             <b-nav-item to="/"><b-icon-person-fill></b-icon-person-fill> About</b-nav-item>
             <b-nav-item to="/resume"><b-icon-file-text></b-icon-file-text> Resume</b-nav-item>
-            <b-nav-item to="/portfolio"><b-icon-file-code></b-icon-file-code> Project Portfolio</b-nav-item>
+            <b-nav-item to="/portfolio"><b-icon-file-code></b-icon-file-code> Projects Portfolio</b-nav-item>
             <b-nav-item to="/contact"><b-icon-envelope-fill></b-icon-envelope-fill> Contact</b-nav-item>
         </b-nav>
 
