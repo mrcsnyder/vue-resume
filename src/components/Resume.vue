@@ -1,7 +1,7 @@
 <template>
     <div>
 
-            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-file-text font-scale="1"></b-icon-file-text> Resume <a class="btn btn-sm btn-dark" :href="'http://resume-api.thisdudecodes.com/pdf-resume/'+resumeLink" target="_blank"><i class="fas fa-download"></i> PDF</a></h1>
+            <h1 id="resume_header" class="trebuchet lg-headers text-center"><b-icon-file-text font-scale="1"></b-icon-file-text> Resume <a class="btn btn-sm btn-dark" :href="'https://resume-api.thisdudecodes.com/pdf-resume/'+resumeLink" target="_blank"><i class="fas fa-download"></i> PDF</a></h1>
 
             <div class="row">
 

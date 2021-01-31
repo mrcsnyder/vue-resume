@@ -56,7 +56,7 @@
 
         data() {
             return {
-                urlPre: 'http://resume-api.thisdudecodes.com/api/'
+                urlPre: 'https://resume-api.thisdudecodes.com/api/'
             }
         },
 

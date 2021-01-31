@@ -39,7 +39,7 @@
 
                 <div  class="" v-if="fillGallery.length > 0 && this.currentImg <= fillGallery.length">
                     <transition name="fade">
-                    <b-img v-show="isLoad" @load="loaded" class="img-fluid" fluid-grow :src="'http://resume-api.thisdudecodes.com/images/portfolio-gallery-images/'+fillGallery[this.currentImg].file_name" />
+                    <b-img v-show="isLoad" @load="loaded" class="img-fluid" fluid-grow :src="'https://resume-api.thisdudecodes.com/images/portfolio-gallery-images/'+fillGallery[this.currentImg].file_name" />
                     </transition>
                 </div>
 

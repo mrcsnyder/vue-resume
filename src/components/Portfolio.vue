@@ -20,7 +20,7 @@
                                                                    :project-title="project.title"
                                                                    :fill-gallery="gallery"
                                                                    :key="gallery.file_name"
-                                                                   :main-image="'http://resume-api.thisdudecodes.com/images/portfolio-gallery-images/thmb-'+image.file_name+''"
+                                                                   :main-image="'https://resume-api.thisdudecodes.com/images/portfolio-gallery-images/thmb-'+image.file_name+''"
                                                 />
                                                  <figcaption itemprop="caption description">{{image.description}}</figcaption>
 
@@ -66,7 +66,7 @@
             return{
 
                 gallery:[],
-                urlPre: 'http://resume-api.thisdudecodes.com/api/',
+                urlPre: 'https://resume-api.thisdudecodes.com/api/',
             }
 
         },
