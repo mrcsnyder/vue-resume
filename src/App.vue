@@ -216,6 +216,7 @@ mounted() {
 
   .main-text {
     font-size: 1.3em;
+    white-space: pre-wrap;
   }
 
   .nav-tabs .nav-link {
