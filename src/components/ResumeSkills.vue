@@ -10,8 +10,8 @@
 
                 <tbody>
                 <tr v-for="code in skills.coding" :key="code.id" class="d-flex">
-                    <td class="col-6">{{code.skill}}</td>
-                    <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+code.rating+'%;'"></div></div></td>
+                    <td class="col-12">{{code.skill}}</td>
+                    <!-- <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+code.rating+'%;'"></div></div></td> -->
                 </tr>
                 </tbody>
             </table>
@@ -23,8 +23,8 @@
 
                 <tbody>
                 <tr v-for="method in skills.methods_devops" :key="method.id" class="d-flex">
-                    <td class="col-6">{{method.skill}}</td>
-                    <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+method.rating+'%;'"></div></div></td>
+                    <td class="col-12">{{method.skill}}</td>
+                    <!-- <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+method.rating+'%;'"></div></div></td> -->
                 </tr>
                 </tbody>
             </table>
@@ -37,8 +37,8 @@
 
                 <tbody>
                 <tr v-for="software in skills.software" :key="software.id" class="d-flex">
-                    <td class="col-6">{{software.skill}}</td>
-                    <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+software.rating+'%;'"></div></div></td>
+                    <td class="col-12">{{software.skill}}</td>
+                    <!-- <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+software.rating+'%;'"></div></div></td> -->
                 </tr>
                 </tbody>
             </table>
@@ -51,8 +51,8 @@
 
                 <tbody>
                 <tr v-for="operating_system in skills.operating_systems" :key="operating_system.id" class="d-flex">
-                    <td class="col-6">{{operating_system.skill}}</td>
-                    <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+operating_system.rating+'%;'"></div></div></td>
+                    <td class="col-12">{{operating_system.skill}}</td>
+                    <!-- <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+operating_system.rating+'%;'"></div></div></td> -->
                 </tr>
                 </tbody>
 
@@ -66,8 +66,8 @@
 
                 <tbody>
                 <tr v-for="biz in skills.business" :key="biz.id" class="d-flex">
-                    <td class="col-6">{{biz.skill}}</td>
-                    <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+biz.rating+'%;'"></div></div></td>
+                    <td class="col-12">{{biz.skill}}</td>
+                    <!-- <td class="col-6"><div class="rating"><div class="stars"></div><div class="back" :style="'width:'+biz.rating+'%;'"></div></div></td> -->
                 </tr>
                 </tbody>
             </table>
